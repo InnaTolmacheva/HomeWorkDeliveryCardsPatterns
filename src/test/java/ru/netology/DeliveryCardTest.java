@@ -1,8 +1,6 @@
 package ru.netology;
 
 import com.codeborne.selenide.Condition;
-import com.github.javafaker.Faker;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
@@ -10,20 +8,10 @@ import org.openqa.selenium.Keys;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 import static com.codeborne.selenide.Selenide.*;
 
 public class DeliveryCardTest {
-    static RegistrationInfo info = new RegistrationInfo();
-
-    @BeforeAll
-    public static void generateData() {
-        Faker faker = new Faker(new Locale("ru"));
-        info.setCity(faker.address().cityName());
-        info.setName(faker.name().fullName());
-        info.setPhone(faker.phoneNumber().phoneNumber());
-    }
 
     @BeforeEach
     void setUp2() {
@@ -37,6 +25,7 @@ public class DeliveryCardTest {
 
     @Test
     public void successfulAppointmentBooking() {
+        RegistrationInfo info = DataGenerator.Registration.registrationInfo("ru");
         String meetingDate = meetingDate(4);
         String meetingOtherDate = meetingDate(10);
         $("[placeholder=\"Город\"]").setValue(info.getCity());// заполнить поле город
