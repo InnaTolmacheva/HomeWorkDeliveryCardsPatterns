@@ -2,9 +2,9 @@ package ru.netology;
 
 public class RegistrationInfo {
 
-    private String city;
-    private String name;
-    private String phone;
+    private final String city;
+    private final String name;
+    private final String phone;
 
     public RegistrationInfo(String city, String name, String phone) {
 

@@ -6,9 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 
 import java.time.Duration;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import static com.codeborne.selenide.Selenide.*;
 
 public class DeliveryCardTest {
@@ -18,16 +15,11 @@ public class DeliveryCardTest {
         open("http://localhost:9999");
     }
 
-    public String meetingDate(int shift) {
-        LocalDate newDate = LocalDate.now().plusDays(shift);
-        return newDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-    }
-
     @Test
     public void successfulAppointmentBooking() {
         RegistrationInfo info = DataGenerator.Registration.registrationInfo("ru");
-        String meetingDate = meetingDate(4);
-        String meetingOtherDate = meetingDate(10);
+        String meetingDate = DataGenerator.meetingDate(4);
+        String meetingOtherDate = DataGenerator.meetingDate(10);
         $("[placeholder=\"Город\"]").setValue(info.getCity());// заполнить поле город
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);// очистить дату
         $("[placeholder=\"Дата встречи\"]").setValue(meetingDate);// заполнить поле дата
