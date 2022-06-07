@@ -19,7 +19,7 @@ public class DataGenerator {
         }
     }
 
-    public String meetingDate(int shift) {
+    public static String meetingDate(int shift) {
         LocalDate newDate = LocalDate.now().plusDays(shift);
         return newDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
